@@ -1,6 +1,6 @@
-#Task
+# Task
 * Make service which converts json source to collection of entities 
-#Requirements
+# Requirements
 * Pimple as IoC container
 * Validate fields (regex or closure)
 * Entity serialization
