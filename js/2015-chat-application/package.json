@@ -1,0 +1,26 @@
+{
+  "name": "test-task",
+  "version": "1.0.0",
+  "description": "test",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "chai": "^3.5.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha": "^0.4.15",
+    "matchdep": "^1.0.1",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
+  },
+  "dependencies": {
+    "express": "^2.5.5",
+    "socket.io": "^0.9.14"
+  }
+}

@@ -1,0 +1,29 @@
+<script type="text/template" id="content">
+    <div class="ca-messages-wrapper">
+        <div class="ca-messages-border">
+            <div class="ca-messages c-messages"></div>
+        </div>
+    </div>
+    <form class="c-message">
+        <div class="ca-message-wrapper">
+            <input class="ca-message e-message-text" autocomplete="off">
+        </div><!--
+        --><button class="ca-message-send">Send</button>
+    </form>
+</script>
+
+<script type="text/template" id="message">
+   <div class="ca-message-row">
+        <div class="<% if (isCurrentUser) print('ca-pull-right'); %>">
+            <% if (!isCurrentUser) { %>
+                &nbsp;<b class="ca-message-nickname"><%= name %></b>&nbsp;&lt;&nbsp;
+            <% } %>
+
+            <%- text %>
+
+            <% if (isCurrentUser) { %>
+                &nbsp;&gt;&nbsp;<b class="ca-message-nickname">Me</b>&nbsp;
+            <% } %>
+        </div>
+   </div>
+</script>

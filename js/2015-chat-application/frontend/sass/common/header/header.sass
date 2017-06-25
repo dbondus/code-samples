@@ -1,0 +1,46 @@
+@import compass/css3/border-radius
+@import compass/css3/transition
+@import compass/css3/box-sizing
+@import definitions
+
+.ca-nav-bar
+    text-align: center
+    padding-top: 1px
+
+.ca-nav-tab
+    background-color: #fff
+    +transition-duration(300ms)
+
+    vertical-align: bottom
+    display: inline-block
+
+    height: 30px
+    width: 34%
+    line-height: 30px
+    border: 1px solid
+    +box-sizing(border-box)
+
+    cursor: pointer
+
+    &:last-child
+        border-left: none
+        width: 33%
+        +border-radius(0 5px 5px 0, 0 5px 5px 0)
+
+    &:first-child
+        border-right: none
+        width: 33%
+        +border-radius(5px 0 0 5px, 5px 0 0 5px)
+
+    &.ca-blink
+        background-color: #ff4172
+
+    &.active
+        background-color: lightskyblue
+
+.ca-message-counter
+    font-family: $font-family-bold
+    font-size: 10px
+    position: relative
+    top: -7px
+    left: 3px

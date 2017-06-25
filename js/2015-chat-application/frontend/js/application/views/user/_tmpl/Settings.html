@@ -1,0 +1,26 @@
+<script type="text/template" id="content">
+    <div class="ca-accordion c-accordion"></div>
+</script>
+
+<script type="text/template" id="accordion-row">
+    <section class="c-accordion-row">
+        <header class="ca-accordion-header selection-disabled e-header">
+            <span class="ca-accordion-bullet">&nbsp;</span><%= caption %>
+        </header>
+
+        <div class="ca-accordion-content c-content">
+            <%= content %>
+        </div>
+    </section>
+</script>
+
+<script type="text/template" id="settings-photos">
+    <div class="c-width"></div>
+    <div class="c-height"></div>
+</script>
+
+<script type="text/template" id="settings-chat">
+    <label>
+        Nickname <input class="ca-settings-nickname e-name" value="<%= name %>">
+    </label>
+</script>

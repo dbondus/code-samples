@@ -1,0 +1,45 @@
+@import compass/css3/box-sizing
+
+.ca-photo-arrow
+    padding-bottom: 42px
+    display: inline-block
+    top: -17px
+    position: relative
+    width: 32px
+    cursor: pointer
+    z-index: 10
+    background-size: cover
+    background-repeat: no-repeat
+
+.ca-photo-arrow-left
+    @extend .ca-photo-arrow
+    background-image: url('/img/arrow_left.png')
+    margin-right: -32px
+
+.ca-photo-arrow-right
+    @extend .ca-photo-arrow
+    background-image: url('/img/arrow_right.png')
+    margin-left: -32px
+
+.ca-photo-container
+    display: inline-block
+    vertical-align: middle
+    width: 100%
+    +box-sizing(border-box)
+    padding: 25px
+    text-align: center
+    margin: 0px -4px
+    height: 100%
+
+.ca-photo-image-wrapper
+    overflow: hidden
+    height: 100%
+    position: relative
+
+    img
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        margin: auto

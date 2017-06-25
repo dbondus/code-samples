@@ -1,0 +1,3 @@
+feedback_handle:
+    pattern:     /feedback/{type}
+    defaults: { _controller: task.feedback.controller:handleAction, type: sms }

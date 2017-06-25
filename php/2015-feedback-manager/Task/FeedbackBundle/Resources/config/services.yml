@@ -1,0 +1,22 @@
+parameters:
+    feedback.controller.class: Task\FeedbackBundle\Controller\FeedbackController
+    feedback.handler.class: Task\FeedbackBundle\Service\FeedbackHandler
+
+services:
+    task.feedback.handler:
+        class: "%feedback.handler.class%"
+        arguments: [@event_dispatcher]
+
+    task.feedback.controller:
+        class: "%feedback.controller.class%"
+        arguments: [@task.feedback.handler]
+
+    task.feedback.logger:
+        class: Task\FeedbackBundle\Service\FeedbackLogger
+        arguments: [@doctrine.orm.entity_manager]
+
+    task.feedback.processor.sms:
+        class: Task\FeedbackBundle\Service\FeedbackProcessor\AsteriskFeedbackProcessor\SMSFeedbackProcessor
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            -  { name: task.feedback.processor, type: sms }
