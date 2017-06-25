@@ -1,6 +1,6 @@
-#Task
+# Task
 * Make small boilerplate for backbone-based projects 
-#Requirements
+# Requirements
 * Separate route configuration from router
 * Use application level mediator for communication
 * Promisify Model and Collection methods
