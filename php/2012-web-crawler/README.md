@@ -1,6 +1,6 @@
-#Task
+# Task
 * Make multiprocess webpage crawler
-#Requirements
+# Requirements
 * Count available images
 * Scan for available links
 * Generate report
