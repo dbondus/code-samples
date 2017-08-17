@@ -1,6 +1,6 @@
 define([
     'backbone'
-], function(Backbone) {
+], function (Backbone) {
     "use strict";
 
     //should provide event methods

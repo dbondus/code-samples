@@ -5,9 +5,11 @@ namespace Task\FeedbackBundle\Service\FeedbackProcessor;
 use Task\FeedbackBundle\Entity\FeedbackAuthor;
 use Task\FeedbackBundle\Service\AFeedbackProcessor;
 
-abstract class AAsteriskFeedbackProcessor extends AFeedbackProcessor {
+abstract class AAsteriskFeedbackProcessor extends AFeedbackProcessor
+{
 
-    protected function _prepareFeedbackData($raw) {
+    protected function _prepareFeedbackData($raw)
+    {
         return array_merge(parent::_prepareFeedbackData($raw), [
             'feedbackAuthorID' => $this->_getOrCreateFeedbackAuthorByPhone($raw['authorPhone'])
         ]);
@@ -17,7 +19,8 @@ abstract class AAsteriskFeedbackProcessor extends AFeedbackProcessor {
      * @param string $authorPhone
      * @return int
      */
-    protected function _getOrCreateFeedbackAuthorByPhone($authorPhone) {
+    protected function _getOrCreateFeedbackAuthorByPhone($authorPhone)
+    {
         /**
          * @var FeedbackAuthor $author
          */

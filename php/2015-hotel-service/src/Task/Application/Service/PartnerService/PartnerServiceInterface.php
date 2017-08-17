@@ -13,7 +13,7 @@ interface PartnerServiceInterface
     /**
      * This method should read from a datasource (JSON in our case)
      * and return an unsorted list of hotels found in the datasource.
-     * 
+     *
      * @param integer $iCityId
      *
      * @return \Task\Application\Entity\Hotel[]

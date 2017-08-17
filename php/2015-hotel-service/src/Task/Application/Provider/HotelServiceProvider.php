@@ -11,7 +11,7 @@ class HotelServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        $container['hotel_service'] = function() use ($container) {
+        $container['hotel_service'] = function () use ($container) {
             return new MyHotelService(
                 $container['partner_service']
             );

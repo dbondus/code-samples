@@ -2,9 +2,7 @@ define([
     'views/user/Chat',
     'views/user/Photos',
     'views/user/Settings'
-], function(
-    ChatView, PhotosView, SettingsView
-) {
+], function (ChatView, PhotosView, SettingsView) {
     return {
         '(/)(chat)': {
             name: 'chat',

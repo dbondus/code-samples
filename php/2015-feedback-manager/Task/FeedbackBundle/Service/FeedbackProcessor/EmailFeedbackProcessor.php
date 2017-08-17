@@ -5,11 +5,13 @@ namespace Task\FeedbackBundle\Service\FeedbackProcessor;
 use Task\FeedbackBundle\Entity\FeedbackAuthor;
 use Task\FeedbackBundle\Service\AFeedbackProcessor;
 
-class EmailFeedbackProcessor extends AFeedbackProcessor {
+class EmailFeedbackProcessor extends AFeedbackProcessor
+{
 
     protected $_type = 'FEEDBACK_TYPE_EMAIL';
 
-    protected function _prepareFeedbackData($raw) {
+    protected function _prepareFeedbackData($raw)
+    {
         return array_merge(parent::_prepareFeedbackData($raw), [
             'feedbackAuthorID' => $this->_getOrCreateFeedbackAuthorByEmail($raw['authorEmail'])
         ]);
@@ -19,7 +21,8 @@ class EmailFeedbackProcessor extends AFeedbackProcessor {
      * @param string $authorEmail
      * @return int
      */
-    protected function _getOrCreateFeedbackAuthorByEmail($authorEmail) {
+    protected function _getOrCreateFeedbackAuthorByEmail($authorEmail)
+    {
         /**
          * @var FeedbackAuthor $author
          */

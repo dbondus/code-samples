@@ -1,11 +1,11 @@
 define([
-	'bluebird'
-], function(Bluebird) {
-	Bluebird.onPossiblyUnhandledRejection(function(e) {
-		console.error(e.message, 'in', e.fileName);
+    'bluebird'
+], function (Bluebird) {
+    Bluebird.onPossiblyUnhandledRejection(function (e) {
+        console.error(e.message, 'in', e.fileName);
 
-		throw e;
-	});
+        throw e;
+    });
 
-	return Bluebird;
+    return Bluebird;
 });

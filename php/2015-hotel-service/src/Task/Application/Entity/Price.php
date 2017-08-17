@@ -1,12 +1,13 @@
 <?php
 
 namespace Task\Application\Entity;
+
 use DateTime;
 
 /**
  * Represents a single price from a search result
  * related to a single partner.
- * 
+ *
  * @author mmueller
  */
 class Price extends BaseEntity
@@ -26,21 +27,21 @@ class Price extends BaseEntity
 
     /**
      * Description text for the rate/price
-     * 
+     *
      * @var string
      */
     public $sDescription;
 
     /**
      * Price in euro
-     * 
+     *
      * @var float
      */
     public $fAmount;
 
     /**
      * Arrival date, represented by a DateTime obj
-     * which needs to be converted from a string on 
+     * which needs to be converted from a string on
      * write of the property.
      *
      * @var DateTime
@@ -49,7 +50,7 @@ class Price extends BaseEntity
 
     /**
      * Departure date, represented by a DateTime obj
-     * which needs to be converted from a string on 
+     * which needs to be converted from a string on
      * write of the property
      *
      * @var DateTime

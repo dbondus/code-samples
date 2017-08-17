@@ -1,14 +1,14 @@
 <?php
-declare(ticks = 1);
+declare(ticks=1);
 error_reporting(E_ALL);
 
 define('MAX_PROCESSES', 40);
 
-pcntl_signal(SIGINT, function() {
+pcntl_signal(SIGINT, function () {
     exit(1);
 });
 
-pcntl_signal(SIGTERM, function() {
+pcntl_signal(SIGTERM, function () {
     exit(1);
 });
 
@@ -19,7 +19,8 @@ $crawler->createReport();
 /**
  * bot
  */
-class Crawler {
+class Crawler
+{
 
     /**
      * @var array
@@ -67,7 +68,8 @@ class Crawler {
     /**
      * @param string $url starting url
      */
-    public function __construct($url) {
+    public function __construct($url)
+    {
         $tmp = $this->_processTargetUrl($url);
     }
 
@@ -75,7 +77,8 @@ class Crawler {
      * extract domain and prepar first url for queue
      * @param string $url
      */
-    private function _processTargetUrl($url) {
+    private function _processTargetUrl($url)
+    {
         $url = rtrim($url, '/');
         $url = str_replace('http://', '', $url);
 
@@ -83,12 +86,12 @@ class Crawler {
 
         $this->_domain = $parts[0];
 
-        if(!preg_match('/^([a-zA-Z\d][a-zA-Z\d\-]{0,62}\b\.){1,126}[a-zA-Z\/]{1,6}$/', $this->_domain)) {
+        if (!preg_match('/^([a-zA-Z\d][a-zA-Z\d\-]{0,62}\b\.){1,126}[a-zA-Z\/]{1,6}$/', $this->_domain)) {
             echo "Domain name is incorrect!\n";
             exit(1);
         }
 
-        if(strpos($this->_domain, 'www') === 0) {
+        if (strpos($this->_domain, 'www') === 0) {
             $this->_wwwDomain = $this->_domain;
             $this->_domain = str_replace('www.', '', $this->_domain);
         } else {
@@ -102,11 +105,12 @@ class Crawler {
     /**
      * common destructor
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->_isMainProcess) {
             //final cleanup
             //echo 'main dead';
-        }else {
+        } else {
             //echo 'child dead';
         }
     }
@@ -115,7 +119,8 @@ class Crawler {
      * start child process for each url from queue and
      * handle data from finished process
      */
-    public function run() {
+    public function run()
+    {
         $this->_isMainProcess = false;
 
         $canContinue = true;
@@ -128,7 +133,7 @@ class Crawler {
 
                 $pid = $this->_newProcess($nextUrl);
                 if ($pid) {
-                    echo $nextUrl."\n";
+                    echo $nextUrl . "\n";
                     $this->_runningProcesses[] = array(
                         'pid' => $pid,
                         'taskId' => $this->_taskId
@@ -154,7 +159,7 @@ class Crawler {
             }
 
             //"exit" condition
-            if(!$this->_processCnt && !$this->_urlsQueue) {
+            if (!$this->_processCnt && !$this->_urlsQueue) {
                 $this->_isMainProcess = true;
                 $canContinue = false;
             } else {
@@ -167,11 +172,12 @@ class Crawler {
      * handle child process's data file
      * @param string $taskId
      */
-    private function _processTaskData($taskId) {
-        if(!file_exists($this->_workPath.$taskId)) {
+    private function _processTaskData($taskId)
+    {
+        if (!file_exists($this->_workPath . $taskId)) {
             return;
         }
-        $data = unserialize(file_get_contents($this->_workPath.$taskId));
+        $data = unserialize(file_get_contents($this->_workPath . $taskId));
 
         $urls = $data['urls'];
 
@@ -181,9 +187,9 @@ class Crawler {
             'duration' => $data['duration']
         );
 
-        foreach($urls as $rawUrl) {
+        foreach ($urls as $rawUrl) {
             //ignore
-            if(strpos($rawUrl, ':') !== false && strpos($rawUrl, 'http') !==0) {
+            if (strpos($rawUrl, ':') !== false && strpos($rawUrl, 'http') !== 0) {
                 $this->_log('INVALID ' . $rawUrl);
                 continue;
             }
@@ -193,10 +199,10 @@ class Crawler {
             $logStr = $rawUrl . ' >> ' . $url;
 
             //check for new url
-            if(!isset($this->_urls[$url])) {
+            if (!isset($this->_urls[$url])) {
                 $tmp = str_replace('http://', '', $url);
                 //check for site bounds
-                if(strpos($tmp, $this->_domain) === 0 || strpos($tmp, $this->_wwwDomain) === 0) {
+                if (strpos($tmp, $this->_domain) === 0 || strpos($tmp, $this->_wwwDomain) === 0) {
                     $this->_urlsQueue[$url] = true;
                     $this->_urls[$url] = true;
                     $this->_log('CORRECT ' . $logStr);
@@ -209,14 +215,15 @@ class Crawler {
             }
         }
 
-        unlink($this->_workPath.$taskId);
+        unlink($this->_workPath . $taskId);
     }
 
     /**
      * fork child process with uniq id
      * @param string $url
      */
-    private function _newProcess($url) {
+    private function _newProcess($url)
+    {
         $this->_processCnt++;
         $this->_taskId = uniqid('.process_');
 
@@ -224,7 +231,7 @@ class Crawler {
 
         if ($pid == -1) { //error
             return false;
-        }elseif ($pid) { // parent
+        } elseif ($pid) { // parent
             return $pid;
         }
 
@@ -239,11 +246,12 @@ class Crawler {
      * @param string $relativePath
      * @return string
      */
-    private function _getAbsolutePath($basePath, $relativePath) {
+    private function _getAbsolutePath($basePath, $relativePath)
+    {
         preg_match('/\.html?$/', $basePath) && ($basePath = substr($basePath, 0, strrpos($basePath, '/')));
         //site root
         if ($relativePath == '/') {
-            return 'http://'.$this->_domain;
+            return 'http://' . $this->_domain;
         }
 
         $relativePath = rtrim($relativePath, '/');
@@ -257,16 +265,16 @@ class Crawler {
         }
 
         //anchor
-        if(strpos($relativePath, '#') !== false) {
+        if (strpos($relativePath, '#') !== false) {
             $relativePath = preg_replace('/#.*/', '', $relativePath);
         }
 
         //empty
-        if(!strlen($relativePath)) {
+        if (!strlen($relativePath)) {
             return rtrim($basePath, '/');
         }
 
-        if($relativePath[0] == '/') {
+        if ($relativePath[0] == '/') {
             //from root
             $absoluteParts = array($this->_domain);
             $relativeParts = explode('/', trim($relativePath, '/'));
@@ -280,8 +288,8 @@ class Crawler {
         //keep root in case malformed relative path
         $root = array_shift($absoluteParts) . '/';
 
-        foreach($relativeParts as $part) {
-            switch($part) {
+        foreach ($relativeParts as $part) {
+            switch ($part) {
                 case '..':
                     array_pop($absoluteParts);
                     break;
@@ -301,19 +309,20 @@ class Crawler {
      * get html from url and count metrics data
      * @param string $url
      */
-    private function _processURL($url) {
+    private function _processURL($url)
+    {
         $startTime = $this->_getMicrotime();
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FAILONERROR, 1);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
-        $result = curl_exec ($ch);
-        curl_close ($ch);
-        if($result) {
+        $result = curl_exec($ch);
+        curl_close($ch);
+        if ($result) {
             $dom = new DOMDocument('1.0');
             @$dom->loadHTML($result);
 
@@ -333,7 +342,7 @@ class Crawler {
                 'images' => $imgs->length,
                 'duration' => $this->_getMicrotime() - $startTime
             ));
-        }else {
+        } else {
             $this->_saveValue(array(
                 'url' => $url,
                 'urls' => array(),
@@ -346,7 +355,8 @@ class Crawler {
     /**
      * @return float
      */
-    private function _getMicrotime() {
+    private function _getMicrotime()
+    {
         return microtime(true);
     }
 
@@ -354,15 +364,17 @@ class Crawler {
      * save process's serialized data in uniq file
      * @param $value
      */
-    private function _saveValue($value) {
-        file_put_contents($this->_workPath.$this->_taskId, serialize($value));
+    private function _saveValue($value)
+    {
+        file_put_contents($this->_workPath . $this->_taskId, serialize($value));
     }
 
     /**
      * @param string $value
      */
-    private function _log($value) {
-        file_put_contents('log', $value."\n", FILE_APPEND);
+    private function _log($value)
+    {
+        file_put_contents('log', $value . "\n", FILE_APPEND);
         //echo $value."\n";
     }
 
@@ -370,9 +382,10 @@ class Crawler {
      * prepare data for report generation
      * @return array
      */
-    private function _filterData() {
+    private function _filterData()
+    {
         //get only processed urls
-        $res = array_filter($this->_urls, function($value) {
+        $res = array_filter($this->_urls, function ($value) {
             return is_array($value);
         });
 
@@ -391,7 +404,8 @@ class Crawler {
     /**
      * generate html report file
      */
-    public function createReport() {
+    public function createReport()
+    {
         $data = $this->_filterData();
 
         $reportFile = 'report_' . date('d.m.Y') . '.html';
@@ -404,7 +418,7 @@ class Crawler {
 
         //report header
         $result = array('<!DOCTYPE html><html><head><title>Crawler Report</title></head><body><table><tr>');
-        foreach($tableHeaders as $header) {
+        foreach ($tableHeaders as $header) {
             $result[] = "<th>{$header}</th>";
         }
         $result[] = "</tr>\n";
@@ -413,7 +427,7 @@ class Crawler {
 
         $cnt = count($data);
 
-        if($cnt) {
+        if ($cnt) {
             $part = 1;
             $partLimit = 50;
             $partLimit > $cnt && ($partLimit = $cnt);
@@ -423,17 +437,17 @@ class Crawler {
             //export in parts by 50 rows
             $i = 0;
             reset($data);
-            while($part <= $parts) {
+            while ($part <= $parts) {
                 $result = array();
-                $iLen = $part*$partLimit;
+                $iLen = $part * $partLimit;
                 $iLen > $cnt && ($iLen -= $iLen - $cnt);
-                while($i < $iLen) {
+                while ($i < $iLen) {
                     $result[] = '<tr>';
 
                     list($addr, $row) = each($data);
 
                     $result[] = "<td>{$addr}</td>";
-                    foreach($row as $col) {
+                    foreach ($row as $col) {
                         $result[] = "<td>{$col}</td>";
                     }
 

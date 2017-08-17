@@ -1,5 +1,5 @@
 define([
     'app/Router'
-], function(Router) {
+], function (Router) {
     return new Router();
 });

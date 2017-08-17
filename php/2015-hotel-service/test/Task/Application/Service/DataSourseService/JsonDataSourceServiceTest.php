@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Service\DataSourceService;
 
 use org\bovigo\vfs\vfsStream;
@@ -26,7 +27,7 @@ class JsonDataSourceServiceTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         vfsStream::setup('jsonDir');
-        $this->vfsJsonDirectory = vfsStream::copyFromFileSystem(__DIR__.'/../../../Fixtures/Cities');
+        $this->vfsJsonDirectory = vfsStream::copyFromFileSystem(__DIR__ . '/../../../Fixtures/Cities');
 
         $this->sStoragePath = vfsStream::url('jsonDir') . DIRECTORY_SEPARATOR;
     }

@@ -28,7 +28,7 @@ class DataParsingTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         vfsStream::setup('jsonDir');
-        $this->vfsJsonDirectory = vfsStream::copyFromFileSystem(__DIR__.'/../Fixtures/Cities');
+        $this->vfsJsonDirectory = vfsStream::copyFromFileSystem(__DIR__ . '/../Fixtures/Cities');
 
         $this->oApplication = new Application(array(
             'city_data_source.json.storage_path' => vfsStream::url('jsonDir') . DIRECTORY_SEPARATOR

@@ -2,7 +2,7 @@ define([
     'models/base/Model',
     'models/User'
 
-], function(BaseModel, UserModel) {
+], function (BaseModel, UserModel) {
     "use strict";
 
     /**
@@ -12,22 +12,22 @@ define([
     var ApplicationSettings = BaseModel.extend(
         /** @lends ApplicationSettings.prototype */
         {
-        defaults: {
-            user: new UserModel(),
+            defaults: {
+                user: new UserModel(),
 
-            photoWidth: 640,
-            photoHeight: 480
-        },
+                photoWidth: 640,
+                photoHeight: 480
+            },
 
-        /**
-         * Returns current user name
-         *
-         * @returns {string}
-         */
-        getCurrentUserName: function() {
-            return this.get('user').get('name');
-        }
-    });
+            /**
+             * Returns current user name
+             *
+             * @returns {string}
+             */
+            getCurrentUserName: function () {
+                return this.get('user').get('name');
+            }
+        });
 
     return ApplicationSettings;
 });

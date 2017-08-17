@@ -4,51 +4,51 @@ define([
     'lib/Mediator',
     'socket.io',
     'underscore'
-], function(chai, ChatClient, Mediator, io, _) {
+], function (chai, ChatClient, Mediator, io, _) {
     "use strict";
 
     //ToDo: move out
     var fakeSocket = {
         cb: null,
-        on: function(name, cb) {
+        on: function (name, cb) {
             this.cb = cb;
         },
-        trigger: function(name) {
+        trigger: function (name) {
             Array.prototype.shift.apply(arguments);
 
-            if(!this.cb) {
+            if (!this.cb) {
                 throw new Error('listener is not defined');
             }
 
             this.cb.apply(null, arguments);
         },
-        emit: function(name) {
+        emit: function (name) {
         },
-        restore: function() {
+        restore: function () {
             this.cb = null;
         }
     };
 
 
-    suite('ChatClient basics', function() {
+    suite('ChatClient basics', function () {
         /** @type ChatClient */
         var client;
         /** @type Mediator */
         var mediator;
 
-        setup(function() {
+        setup(function () {
             mediator = new Mediator();
             client = new ChatClient(mediator, io);
         });
 
-        teardown(function() {
+        teardown(function () {
             client = null;
             mediator = null;
 
             fakeSocket.restore();
         });
 
-        test('shouldInitializeMessageStoragesWithEmptyArrays', function() {
+        test('shouldInitializeMessageStoragesWithEmptyArrays', function () {
             chai.assert.isArray(client.newMessages, 'newMessages should be an array');
             chai.assert.isArray(client.shownMessages, 'shownMessages should be an array');
 
@@ -56,7 +56,7 @@ define([
             chai.assert.equal(client.shownMessages.length, 0, 'shownMessages should be empty');
         });
 
-        test('shouldReceiveSocketInstance', function() {
+        test('shouldReceiveSocketInstance', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
 
             client.connect();
@@ -66,7 +66,7 @@ define([
             _io.restore();
         });
 
-        test('shouldListenToNewMessageEvent', function() {
+        test('shouldListenToNewMessageEvent', function () {
             var _on = sinon.spy(fakeSocket, 'on');
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
 
@@ -78,7 +78,7 @@ define([
             _on.restore();
         });
 
-        test('shouldListenToApplicationCommands', function() {
+        test('shouldListenToApplicationCommands', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
             var _on = sinon.stub(mediator, 'on');
 
@@ -101,7 +101,7 @@ define([
             _on.restore();
         });
 
-        test('shouldAddNewMessageToTheStorage', function() {
+        test('shouldAddNewMessageToTheStorage', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
 
             var fakeMessage = {
@@ -125,7 +125,7 @@ define([
             _io.restore();
         });
 
-        test('shouldSendNotificationToApplication', function() {
+        test('shouldSendNotificationToApplication', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
             var _on = sinon.stub(mediator, 'trigger');
 
@@ -138,7 +138,7 @@ define([
 
             chai.assert.isTrue(_on.calledWith(mediator.EVENT_CHAT_MESSAGE_INCOMING), 'notification should be send');
             chai.assert.isTrue(
-                _on.calledWithExactly(mediator.EVENT_CHAT_MESSAGE_INCOMING, { amount: 1}),
+                _on.calledWithExactly(mediator.EVENT_CHAT_MESSAGE_INCOMING, {amount: 1}),
                 'notification should be send with actual amount value'
             );
 
@@ -146,7 +146,7 @@ define([
             _on.restore();
         });
 
-        test('shouldRespondToSendNewMessageCommandAndSendItTheServer', function() {
+        test('shouldRespondToSendNewMessageCommandAndSendItTheServer', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
             var _emit = sinon.stub(fakeSocket, 'emit');
 
@@ -159,7 +159,7 @@ define([
 
             chai.assert.isTrue(_emit.calledWith('message'), 'message event should be send via socket.io');
             chai.assert.isTrue(
-                _emit.calledWithExactly('message', { message: 'test1', user: "test" }),
+                _emit.calledWithExactly('message', {message: 'test1', user: "test"}),
                 'message event should be send with actual message data'
             );
 
@@ -167,7 +167,7 @@ define([
             _emit.restore();
         });
 
-        test('shouldSendMessageToTheServer', function() {
+        test('shouldSendMessageToTheServer', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
             var _emit = sinon.stub(fakeSocket, 'emit');
 
@@ -180,7 +180,7 @@ define([
 
             chai.assert.isTrue(_emit.calledWith('message'), 'message event should be send via socket.io');
             chai.assert.isTrue(
-                _emit.calledWithExactly('message', { message: 'text1', user: "user1" }),
+                _emit.calledWithExactly('message', {message: 'text1', user: "user1"}),
                 'message event should be send with actual message data'
             );
 
@@ -188,7 +188,7 @@ define([
             _emit.restore();
         });
 
-        test('shouldReturnAllAvailableMessagesAndEmptyNewMessagesStorage', function() {
+        test('shouldReturnAllAvailableMessagesAndEmptyNewMessagesStorage', function () {
             client.shownMessages = [
                 {user: 'test', message: 'test1'},
                 {user: 'test', message: 'test2'}
@@ -218,7 +218,7 @@ define([
             chai.assert.equal(client.shownMessages.length, 4, 'getAllMessages should return copy of all available messages');
         });
 
-        test('shouldReturnCopyOfRecentMessagesAndEmptyNewMessagesStorageAndMoveOriginalsToShownMessagesStorage', function() {
+        test('shouldReturnCopyOfRecentMessagesAndEmptyNewMessagesStorageAndMoveOriginalsToShownMessagesStorage', function () {
             client.shownMessages = [
                 {user: 'test', message: 'test1'},
                 {user: 'test', message: 'test2'}
@@ -248,7 +248,7 @@ define([
             chai.assert.equal(client.newMessages.length, 0, 'collectRecentMessages should return copy of recent messages');
         });
 
-        test('shouldRespondToGetAllMessagesCommandAndSendMessagesBack', function() {
+        test('shouldRespondToGetAllMessagesCommandAndSendMessagesBack', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
 
             client.connect();
@@ -263,7 +263,7 @@ define([
 
             var fakeCaller = {
                 messages: null,
-                processMessages: function(messages) {
+                processMessages: function (messages) {
                     this.messages = messages;
                 }
             };
@@ -279,7 +279,7 @@ define([
             _io.restore();
         });
 
-        test('shouldRespondToGetNewMessagesCommandAndSendMessagesBack', function() {
+        test('shouldRespondToGetNewMessagesCommandAndSendMessagesBack', function () {
             var _io = sinon.stub(io, 'connect').returns(fakeSocket);
 
             client.connect();
@@ -294,7 +294,7 @@ define([
 
             var fakeCaller = {
                 messages: null,
-                processMessages: function(messages) {
+                processMessages: function (messages) {
                     this.messages = messages;
                 }
             };

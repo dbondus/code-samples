@@ -1,5 +1,7 @@
 <?php
+
 namespace Task\Application\Entity;
+
 use Task\Application\Entity\Collection\PartnerCollection;
 
 /**
@@ -31,14 +33,14 @@ class Hotel extends BaseEntity
 
     /**
      * Street adr. of the hotel.
-     * 
+     *
      * @var string
      */
     public $sAdr;
 
     /**
      * Unsorted list of partners with their corresponding prices.
-     * 
+     *
      * @var PartnerCollection
      */
     public $oPartners = null;

@@ -1,6 +1,6 @@
 define([
     'models/ApplicationSettings'
-], function(ApplicationSettings) {
+], function (ApplicationSettings) {
     "use strict";
 
     return new ApplicationSettings();

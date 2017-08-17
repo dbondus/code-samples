@@ -42,7 +42,7 @@ class MyPartnerService implements PartnerServiceInterface
         /** @var array $aData */
         $aData = $this->oDataSourceService->collectDataById($iCityId);
 
-        if(empty($aData) || !isset($aData['hotels'])) {
+        if (empty($aData) || !isset($aData['hotels'])) {
             throw new NoDataException(sprintf('Invalid city[%d] data', $iCityId));
         }
 
@@ -50,7 +50,7 @@ class MyPartnerService implements PartnerServiceInterface
         $oHotels->denormalize($aData['hotels'], $this->oNormalizer);
 
         //drop invalid entity and stop processing its dependents
-        $oHotels->validate($this->oValidator, function(BaseCollection $oCollection, $iInd, BaseEntity $oEntity, $sPropName, $sError) {
+        $oHotels->validate($this->oValidator, function (BaseCollection $oCollection, $iInd, BaseEntity $oEntity, $sPropName, $sError) {
             unset($oCollection[$iInd]);
 
             return true;

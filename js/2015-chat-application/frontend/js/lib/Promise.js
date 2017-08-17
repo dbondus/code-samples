@@ -1,9 +1,9 @@
 define([
     'bluebird'
-], function(Bluebird) {
+], function (Bluebird) {
     "use strict";
 
-    Bluebird.onPossiblyUnhandledRejection(function(e) {
+    Bluebird.onPossiblyUnhandledRejection(function (e) {
         console.error(e.message, 'in', e.fileName);
 
         throw e;
@@ -13,11 +13,11 @@ define([
      * @class
      * @classdesc Bridge to promise system
      */
-    var Promise = function(resolver) {
+    var Promise = function (resolver) {
         Bluebird.call(this, resolver);
     };
 
-    Promise.resolve = function(object) {
+    Promise.resolve = function (object) {
         return Bluebird.resolve(object);
     };
 

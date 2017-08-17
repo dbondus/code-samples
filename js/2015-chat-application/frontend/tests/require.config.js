@@ -24,7 +24,7 @@ require.config({
     shim: {
         bluebird: {
             exports: 'Bluebird',
-            init: function() {
+            init: function () {
                 /* jshint ignore:start */
                 return Promise.noConflict();
                 /* jshint ignore:end */
@@ -32,11 +32,11 @@ require.config({
         },
 
         jquery: {
-            exports : 'jQuery'
+            exports: 'jQuery'
         },
 
         underscore: {
-            exports : '_'
+            exports: '_'
         },
 
         backbone: {
@@ -48,7 +48,7 @@ require.config({
         },
 
         'socket.io': {
-            exports : 'io'
+            exports: 'io'
         }
     }
 });

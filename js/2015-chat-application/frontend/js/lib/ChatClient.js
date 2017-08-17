@@ -1,6 +1,6 @@
 define([
     'underscore'
-], function(_) {
+], function (_) {
     "use strict";
 
     var SERVER_EVENT_MESSAGE = 'message',
@@ -21,7 +21,7 @@ define([
      * @param {Mediator} mediator
      * @param {io} socketIO
      */
-    var ChatClient = function(mediator, socketIO) {
+    var ChatClient = function (mediator, socketIO) {
         this.mediator = mediator;
         this.io = socketIO;
 
@@ -31,130 +31,130 @@ define([
     _.extend(ChatClient.prototype,
         /** @lends ChatClient.prototype */
         {
-        /**
-         * @type {MessageData[]}
-         */
-        newMessages: null,
+            /**
+             * @type {MessageData[]}
+             */
+            newMessages: null,
 
-        /**
-         * @type {MessageData[]}
-         */
-        shownMessages: null,
+            /**
+             * @type {MessageData[]}
+             */
+            shownMessages: null,
 
-        /** @type {io.Socket} */
-        socket: null,
+            /** @type {io.Socket} */
+            socket: null,
 
-        /** @type {Mediator} */
-        mediator: null,
-        /** @type {io} */
-        io: null,
+            /** @type {Mediator} */
+            mediator: null,
+            /** @type {io} */
+            io: null,
 
-        /**
-         * @constructs
-         */
-        initialize: function() {
-            this.newMessages = [];
-            this.shownMessages = [];
-        },
+            /**
+             * @constructs
+             */
+            initialize: function () {
+                this.newMessages = [];
+                this.shownMessages = [];
+            },
 
-        /**
-         * @param {string} [url]
-         */
-        connect: function(url) {
-            this.socket = this.io.connect(url);
+            /**
+             * @param {string} [url]
+             */
+            connect: function (url) {
+                this.socket = this.io.connect(url);
 
-            this._addListeners();
-        },
+                this._addListeners();
+            },
 
-        /**
-         * @returns {Array.<MessageData>}
-         */
-        getAllMessages: function() {
-            this.collectRecentMessages();
+            /**
+             * @returns {Array.<MessageData>}
+             */
+            getAllMessages: function () {
+                this.collectRecentMessages();
 
-            return this.shownMessages.slice();
-        },
+                return this.shownMessages.slice();
+            },
 
-        /**
-         *  Give back copy of recent messages and mark them as shown
-         *
-         * @returns {Array.<MessageData>}
-         */
-        collectRecentMessages: function() {
-            var recent = this.newMessages.splice(0);
-            this.shownMessages = this.shownMessages.concat(recent);
+            /**
+             *  Give back copy of recent messages and mark them as shown
+             *
+             * @returns {Array.<MessageData>}
+             */
+            collectRecentMessages: function () {
+                var recent = this.newMessages.splice(0);
+                this.shownMessages = this.shownMessages.concat(recent);
 
-            return recent;
-        },
+                return recent;
+            },
 
-        /**
-         * @returns {Number}
-         */
-        getNewMessagesAmount: function() {
-            return this.newMessages.length;
-        },
+            /**
+             * @returns {Number}
+             */
+            getNewMessagesAmount: function () {
+                return this.newMessages.length;
+            },
 
-        /**
-         * @param {MessageData} data
-         * @listens Mediator~event:COMMAND_CHAT_MESSAGE_SEND
-         */
-        sendMessage: function(data) {
-            this.socket.emit(SERVER_COMMAND_MESSAGE_SEND, data);
-        },
+            /**
+             * @param {MessageData} data
+             * @listens Mediator~event:COMMAND_CHAT_MESSAGE_SEND
+             */
+            sendMessage: function (data) {
+                this.socket.emit(SERVER_COMMAND_MESSAGE_SEND, data);
+            },
 
-        /**
-         * Connect listeners to the mediator and current active socket
-         *
-         * @private
-         */
-        _addListeners: function() {
-            this._onMessage = _.bind(this._onMessage, this);
+            /**
+             * Connect listeners to the mediator and current active socket
+             *
+             * @private
+             */
+            _addListeners: function () {
+                this._onMessage = _.bind(this._onMessage, this);
 
-            this.socket.on(SERVER_EVENT_MESSAGE, this._onMessage);
+                this.socket.on(SERVER_EVENT_MESSAGE, this._onMessage);
 
-            this.mediator.on(this.mediator.COMMAND_CHAT_MESSAGES_GET, this._commandGetAllMessages, this);
-            this.mediator.on(this.mediator.COMMAND_CHAT_MESSAGES_COLLECT_NEW, this._commandCollectRecentMessages, this);
+                this.mediator.on(this.mediator.COMMAND_CHAT_MESSAGES_GET, this._commandGetAllMessages, this);
+                this.mediator.on(this.mediator.COMMAND_CHAT_MESSAGES_COLLECT_NEW, this._commandCollectRecentMessages, this);
 
-            this.mediator.on(this.mediator.COMMAND_CHAT_MESSAGE_SEND, this.sendMessage, this);
-        },
+                this.mediator.on(this.mediator.COMMAND_CHAT_MESSAGE_SEND, this.sendMessage, this);
+            },
 
-        /**
-         * Handler for receiving chat messages from server
-         *
-         * @param {MessageData} messageData
-         * @fires Mediator~EVENT_CHAT_MESSAGE_INCOMING
-         * @private
-         */
-        _onMessage: function(messageData) {
-            this.newMessages.push(messageData);
+            /**
+             * Handler for receiving chat messages from server
+             *
+             * @param {MessageData} messageData
+             * @fires Mediator~EVENT_CHAT_MESSAGE_INCOMING
+             * @private
+             */
+            _onMessage: function (messageData) {
+                this.newMessages.push(messageData);
 
-            this.mediator.trigger(this.mediator.EVENT_CHAT_MESSAGE_INCOMING, {
-                amount: this.getNewMessagesAmount()
-            });
-        },
+                this.mediator.trigger(this.mediator.EVENT_CHAT_MESSAGE_INCOMING, {
+                    amount: this.getNewMessagesAmount()
+                });
+            },
 
-        /**
-         * Handler for application command "GetAllMessages"
-         *
-         * @param {Mediator~event:COMMAND_CHAT_MESSAGES_GET} event
-         * @listens Mediator~event:COMMAND_CHAT_MESSAGES_GET
-         * @private
-         */
-        _commandGetAllMessages: function(event) {
-            event.done && event.done.call(event.context, this.getAllMessages());
-        },
+            /**
+             * Handler for application command "GetAllMessages"
+             *
+             * @param {Mediator~event:COMMAND_CHAT_MESSAGES_GET} event
+             * @listens Mediator~event:COMMAND_CHAT_MESSAGES_GET
+             * @private
+             */
+            _commandGetAllMessages: function (event) {
+                event.done && event.done.call(event.context, this.getAllMessages());
+            },
 
-        /**
-         * Handler for application command "CollectRecentMessages"
-         *
-         * @param {Mediator~event:COMMAND_CHAT_MESSAGES_COLLECT_NEW} event
-         * @listens Mediator~event:COMMAND_CHAT_MESSAGES_COLLECT_NEW
-         * @private
-         */
-        _commandCollectRecentMessages: function(event) {
-            event.done && event.done.call(event.context, this.collectRecentMessages());
-        }
-    });
+            /**
+             * Handler for application command "CollectRecentMessages"
+             *
+             * @param {Mediator~event:COMMAND_CHAT_MESSAGES_COLLECT_NEW} event
+             * @listens Mediator~event:COMMAND_CHAT_MESSAGES_COLLECT_NEW
+             * @private
+             */
+            _commandCollectRecentMessages: function (event) {
+                event.done && event.done.call(event.context, this.collectRecentMessages());
+            }
+        });
 
     return ChatClient;
 });

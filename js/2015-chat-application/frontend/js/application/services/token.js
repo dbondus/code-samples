@@ -1,6 +1,6 @@
 define([
     'lib/Token'
-], function(Token) {
+], function (Token) {
     "use strict";
 
     return new Token();

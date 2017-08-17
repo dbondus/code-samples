@@ -2,7 +2,7 @@ define([
     'lib/Router',
 
     'services/mediator'
-], function(Router, mediator) {
+], function (Router, mediator) {
     "use strict";
 
     var router = new Router();

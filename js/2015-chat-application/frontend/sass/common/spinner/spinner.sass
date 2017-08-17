@@ -4,42 +4,42 @@
 $size: 15px
 
 .ca-loader
-    text-indent: -9999em
-    font-size: 20px
+  text-indent: -9999em
+  font-size: 20px
 
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 100px
-    right: 0
-    margin: auto
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 100px
+  right: 0
+  margin: auto
 
-    width: $size
-    height: $size
-    +border-radius(50%)
-    background-color: deepskyblue
-    +animation(spinner1 1s infinite ease-out)
+  width: $size
+  height: $size
+  +border-radius(50%)
+  background-color: deepskyblue
+  +animation(spinner1 1s infinite ease-out)
 
-    +animation-delay(300ms)
+  +animation-delay(300ms)
 
-    &::before
-        @extend .ca-loader
-        left: -100px
-        content: ''
-        +animation-delay(200ms)
-    &::after
-        @extend .ca-loader
-        left: -200px
-        content: ''
-        +animation-delay(100ms)
+  &::before
+    @extend .ca-loader
+    left: -100px
+    content: ''
+    +animation-delay(200ms)
+  &::after
+    @extend .ca-loader
+    left: -200px
+    content: ''
+    +animation-delay(100ms)
 
 +keyframes(spinner1)
-    0%
-        height: $size
-        width: $size
-    50%
-        height: 30px
-        width: 30px
-    100%
-        height: $size
-        width: $size
+  0%
+    height: $size
+    width: $size
+  50%
+    height: 30px
+    width: 30px
+  100%
+    height: $size
+    width: $size

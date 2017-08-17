@@ -15,7 +15,7 @@ class DataSourceServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['city_data_source'] = function() use ($container) {
+        $container['city_data_source'] = function () use ($container) {
             $iMaxDepth = isset($container['city_data_source.json.max_depth'])
                 ? $container['city_data_source.json.max_depth']
                 : 512;

@@ -2,34 +2,34 @@
 @import compass/css3/box-sizing
 
 .ca-accordion
-    padding: 20px
+  padding: 20px
 
 .ca-accordion-bullet
-    width: 27px
-    height: 27px
-    display: inline-block
-    background: url(/img/bullet_right.png) no-repeat
-    background-size: cover
-    vertical-align: baseline
+  width: 27px
+  height: 27px
+  display: inline-block
+  background: url(/img/bullet_right.png) no-repeat
+  background-size: cover
+  vertical-align: baseline
 
 .ca-accordion-header
-    cursor: pointer
-    font-size: 25px
-    margin-top: 20px
+  cursor: pointer
+  font-size: 25px
+  margin-top: 20px
 
 .ca-accordion-header.ca-header-active .ca-accordion-bullet
-    background-image: url(/img/bullet_down.png)
+  background-image: url(/img/bullet_down.png)
 
 .ca-accordion-content
-    +transition-duration(500ms)
-    max-height: 500px
-    overflow: hidden
-    font-size: 18px
-    +box-sizing(border-box)
-    padding-left: 20px
-    padding-top: 10px
+  +transition-duration(500ms)
+  max-height: 500px
+  overflow: hidden
+  font-size: 18px
+  +box-sizing(border-box)
+  padding-left: 20px
+  padding-top: 10px
 
 .ca-content-hidden
-    +transition-duration(200ms)
-    max-height: 0
-    padding-top: 0
+  +transition-duration(200ms)
+  max-height: 0
+  padding-top: 0

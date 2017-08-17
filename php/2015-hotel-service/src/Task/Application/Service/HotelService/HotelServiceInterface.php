@@ -4,10 +4,10 @@ namespace Task\Application\Service\HotelService;
 
 /**
  * The implementation is responsible for resolving the id of the city from the
- * given city name (in this simple case via an array of CityName => id). The second 
+ * given city name (in this simple case via an array of CityName => id). The second
  * responsibility is to sort the returning result from the partner service in whatever
- * way. 
- * 
+ * way.
+ *
  * This breaks with the rule of the separation of concerns, but for this test case we want to
  * keep it simple.
  *

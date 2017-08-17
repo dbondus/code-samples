@@ -11,7 +11,7 @@ class PartnerServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        $container['partner_service'] = function() use ($container) {
+        $container['partner_service'] = function () use ($container) {
             return new MyPartnerService(
                 $container['city_data_source'],
                 $container['entity_normalizer'],

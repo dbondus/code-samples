@@ -7,15 +7,18 @@ use Doctrine\ORM\EntityManager;
 use Task\FeedbackBundle\Entity\FeedbackLogRecord;
 use Task\FeedbackBundle\Util\EntityUtils;
 
-class FeedbackLogger {
+class FeedbackLogger
+{
     /**
      * @var EntityManager
      */
     protected $_em;
+
     /**
      * @param EntityManager $em
      */
-    function __construct(EntityManager $em) {
+    function __construct(EntityManager $em)
+    {
         $this->_em = $em;
     }
 
@@ -25,7 +28,8 @@ class FeedbackLogger {
      * @param string $type
      * @return int
      */
-    public function log($feedbackID, $branchID, $type) {
+    public function log($feedbackID, $branchID, $type)
+    {
         /** @var FeedbackLogRecord $feedbackLog */
         $feedbackLog = EntityUtils::array2entity([
             'feedbackID' => $feedbackID,

@@ -5,7 +5,7 @@ define([
 
     'text!./_tmpl/Slider.html',
     'underscore'
-], function(BaseView, SliderControl, tmplData, _) {
+], function (BaseView, SliderControl, tmplData, _) {
     "use strict";
     /**
      * @typedef SliderOptions
@@ -42,7 +42,7 @@ define([
              *
              * @param {object} e
              */
-            'mousedown .e-handle': function(e) {
+            'mousedown .e-handle': function (e) {
                 e.preventDefault();
 
                 this._dragMouseStart();
@@ -53,7 +53,7 @@ define([
              *
              * @param {object} e
              */
-            'touchstart .e-handle': function(e) {
+            'touchstart .e-handle': function (e) {
                 e.preventDefault();
 
                 this._dragTouchStart();
@@ -79,7 +79,7 @@ define([
          * @param {SliderOptions} [options]
          * @override
          */
-        initialize: function(options) {
+        initialize: function (options) {
             options || (options = {});
             BaseView.prototype.initialize.call(this, options);
 
@@ -98,7 +98,7 @@ define([
          * @override
          * @returns {Slider}
          */
-        render: function() {
+        render: function () {
             BaseView.prototype.render.call(this, {
                 caption: this.caption,
                 value: this.value
@@ -114,7 +114,7 @@ define([
          * Instantiates SliderControl and adds listeners
          * @private
          */
-        _applyControls: function() {
+        _applyControls: function () {
             this.sliderControl = new this.sliderControl(
                 this.$('.e-back'),
                 this.$('.e-handle'), {
@@ -134,7 +134,7 @@ define([
         /**
          * @private
          */
-        _addListeners: function() {
+        _addListeners: function () {
             this.listenTo(this.sliderControl, this.sliderControl.EVENT_CHANGE, this._onSliderValueChange, this);
         },
 
@@ -144,7 +144,7 @@ define([
          * @fires Slider~EVENT_CHANGE
          * @private
          */
-        _onSliderValueChange: function(value) {
+        _onSliderValueChange: function (value) {
             this.$('.e-value').text(value);
 
             this.trigger(this.EVENT_CHANGE, value);
@@ -156,7 +156,7 @@ define([
          * @param {object} e
          * @private
          */
-        _dragMouse: function(e) {
+        _dragMouse: function (e) {
             this.sliderControl.setHandlePosition(e.clientX - this.offset);
         },
 
@@ -166,7 +166,7 @@ define([
          * @param {object} e
          * @private
          */
-        _dragTouch: function(e) {
+        _dragTouch: function (e) {
             e.originalEvent && (e = e.originalEvent);
 
             this.sliderControl.setHandlePosition(e.changedTouches[0].clientX - this.offset);
@@ -176,7 +176,7 @@ define([
          * Initiates mouse moves tracking
          * @private
          */
-        _dragMouseStart: function() {
+        _dragMouseStart: function () {
             this.delegate('mousemove', '.e-container', this._dragMouse);
             this.delegate('mouseup', '.e-container', this._dragMouseEnd);
             this.delegate('mouseleave', '.e-container', this._dragMouseEnd);
@@ -186,7 +186,7 @@ define([
          * Clean up after mouse tracking is finished
          * @private
          */
-        _dragMouseEnd: function() {
+        _dragMouseEnd: function () {
             this.undelegate('mousemove', '.e-container', this._dragMouse);
             this.undelegate('mouseup', '.e-container', this._dragMouseEnd);
             this.undelegate('mouseleave', '.e-container', this._dragMouseEnd);
@@ -196,7 +196,7 @@ define([
          * Initiates touch moves tracking
          * @private
          */
-        _dragTouchStart: function() {
+        _dragTouchStart: function () {
             this.delegate('touchmove', '.e-container', this._dragTouch);
             this.delegate('touchend', '.e-container', this._dragTouchEnd);
             this.delegate('touchcancel', '.e-container', this._dragTouchEnd);
@@ -206,7 +206,7 @@ define([
          * Clean up after touch tracking is finished
          * @private
          */
-        _dragTouchEnd: function() {
+        _dragTouchEnd: function () {
             this.undelegate('mousemove', '.e-container', this._dragTouch);
             this.undelegate('mouseup', '.e-container', this._dragTouchEnd);
             this.undelegate('mouseleave', '.e-container', this._dragTouchEnd);

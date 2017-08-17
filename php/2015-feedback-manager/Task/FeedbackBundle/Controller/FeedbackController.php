@@ -6,13 +6,15 @@ use Task\FeedbackBundle\Service\FeedbackHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class FeedbackController {
+class FeedbackController
+{
     /**
      * @var FeedbackHandler
      */
     protected $_handler;
 
-    function __construct(FeedbackHandler $handler) {
+    function __construct(FeedbackHandler $handler)
+    {
         $this->_handler = $handler;
     }
 
@@ -20,7 +22,8 @@ class FeedbackController {
      * @param string $type
      * @return Response
      */
-    public function handleAction($type) {
+    public function handleAction($type)
+    {
         $feedbackId = $this->_handler->handle([
             'branch' => '123',
             'authorPhone' => '11111111111',

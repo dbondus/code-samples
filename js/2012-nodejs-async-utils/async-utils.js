@@ -14,9 +14,9 @@ module.exports = {
         checkNewJobInterval || (checkNewJobInterval = 200);
 
         maxRetries || (maxRetries = 5);
-        retryDelay || (retryDelay = 5*500);
+        retryDelay || (retryDelay = 5 * 500);
 
-        if(!job || !values || !values.length) {
+        if (!job || !values || !values.length) {
             done && done('invalid params');
             return;
         }
@@ -28,11 +28,11 @@ module.exports = {
             status = {};
 
         var onJobFinish = function (cursor, err, data) {
-            if(err) {
+            if (err) {
                 //retry
-                if(status[cursor] < maxRetries) {
+                if (status[cursor] < maxRetries) {
                     status[cursor]++;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         job(values[cursor], onJobFinish.bind(null, cursor));
                     }, retryDelay);
                     return;
@@ -47,13 +47,13 @@ module.exports = {
         };
 
         var nextJob = function () {
-            if(cursor == valueCnt && !jobThreadCnt) {
+            if (cursor == valueCnt && !jobThreadCnt) {
                 clearInterval(jobWatcher);
                 done && done();
                 return;
             }
 
-            for(var i = jobThreadCnt; cursor < valueCnt && i < maxJobThreads; i++) {
+            for (var i = jobThreadCnt; cursor < valueCnt && i < maxJobThreads; i++) {
                 jobThreadCnt++;
 
                 status[cursor] = 0;
@@ -75,7 +75,7 @@ module.exports = {
      * @param {Object} [context]
      */
     sequence: function sequence(jobs, each, done, context) {
-        if(!jobs || !jobs.length) {
+        if (!jobs || !jobs.length) {
             done && done.call(context, 'jobs list is empty');
             return;
         }
@@ -83,8 +83,8 @@ module.exports = {
         var cursor = 0,
             jobsCnt = jobs.length;
 
-        var onJobFinish = function(err, data) {
-            if(err) {
+        var onJobFinish = function (err, data) {
+            if (err) {
                 done && done.call(context, cursor + '::' + err);
                 return;
             }
@@ -92,7 +92,7 @@ module.exports = {
             each && each.call(context, cursor, data);
 
             cursor++;
-            if(cursor == jobsCnt) {
+            if (cursor == jobsCnt) {
                 done && done.call(context);
                 return;
             }

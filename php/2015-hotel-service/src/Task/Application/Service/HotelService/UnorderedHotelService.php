@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Service\HotelService;
 
 use Task\Application\Service\PartnerService\PartnerServiceInterface;
@@ -18,7 +19,7 @@ class UnorderedHotelService implements HotelServiceInterface
 
     /**
      * Maps from city name to the id for the partner service.
-     *  
+     *
      * @var array
      */
     private $aCityToIdMapping = array(
@@ -30,7 +31,7 @@ class UnorderedHotelService implements HotelServiceInterface
      */
     public function __construct(PartnerServiceInterface $oPartnerService)
     {
-       $this->oPartnerService = $oPartnerService;
+        $this->oPartnerService = $oPartnerService;
     }
 
     /**
@@ -38,8 +39,7 @@ class UnorderedHotelService implements HotelServiceInterface
      */
     public function getHotelsForCity($sCityName)
     {
-        if (!isset($this->aCityToIdMapping[$sCityName]))
-        {
+        if (!isset($this->aCityToIdMapping[$sCityName])) {
             throw new \InvalidArgumentException(sprintf('Given city name [%s] is not mapped.', $sCityName));
         }
 

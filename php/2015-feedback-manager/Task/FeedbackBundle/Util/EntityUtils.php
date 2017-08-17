@@ -1,15 +1,18 @@
 <?php
+
 namespace Task\FeedbackBundle\Util;
 
 
-class EntityUtils {
+class EntityUtils
+{
 
-    public static function entity2array($entity) {
+    public static function entity2array($entity)
+    {
         $res = array();
 
         $props = (array)$entity;
-        foreach($props as $name => $value) {
-            if(strpos($name, "\0") === 0) {
+        foreach ($props as $name => $value) {
+            if (strpos($name, "\0") === 0) {
                 $name = substr($name, strpos($name, "\0", 1) + 1);
                 $getter = 'get' . ucfirst($name);
 
@@ -23,12 +26,13 @@ class EntityUtils {
         return $res;
     }
 
-    public static function array2entity($data, $entity) {
+    public static function array2entity($data, $entity)
+    {
         $props = (array)$entity;
-        foreach($props as $name => $value) {
-            if(strpos($name, "\0") === 0) {
+        foreach ($props as $name => $value) {
+            if (strpos($name, "\0") === 0) {
                 $name = substr($name, strpos($name, "\0", 1) + 1);
-                if(isset($data[$name])) {
+                if (isset($data[$name])) {
                     $setter = 'set' . ucfirst($name);
 
                     is_callable([$entity, $setter]) && $entity->$setter($data[$name]);

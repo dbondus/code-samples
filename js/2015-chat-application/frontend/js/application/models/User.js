@@ -1,7 +1,7 @@
 define([
     'models/base/Model'
 
-], function(BaseModel) {
+], function (BaseModel) {
 
     /**
      * @class
@@ -12,10 +12,10 @@ define([
          * @lends User.prototype
          */
         {
-        defaults: {
-            name: 'Anonymous ' + Math.floor(Math.random()*1000)
-        }
-    });
+            defaults: {
+                name: 'Anonymous ' + Math.floor(Math.random() * 1000)
+            }
+        });
 
     return User;
 });

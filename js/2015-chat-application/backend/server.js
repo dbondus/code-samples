@@ -25,11 +25,11 @@ io.sockets.on('connection', function (socket) {
     sendMessage(socket);
 });
 
-var sendMessage = function(socket) {
+var sendMessage = function (socket) {
     socket.emit('message', {
-        message : 'Hello!',
-        user : 'echoBot2000'
+        message: 'Hello!',
+        user: 'echoBot2000'
     });
 
-    setTimeout(sendMessage.bind(null, socket), Math.ceil(Math.random()*5000));
+    setTimeout(sendMessage.bind(null, socket), Math.ceil(Math.random() * 5000));
 };

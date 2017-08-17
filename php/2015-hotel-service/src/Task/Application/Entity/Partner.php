@@ -1,10 +1,12 @@
 <?php
+
 namespace Task\Application\Entity;
+
 use Task\Application\Entity\Collection\PriceCollection;
 
 /**
  * Represents a single partner from a search result.
- * 
+ *
  * @author mmueller
  */
 class Partner extends BaseEntity
@@ -30,15 +32,15 @@ class Partner extends BaseEntity
 
     /**
      * Url of the partner's homepage (root link)
-     * 
+     *
      * @var string
      */
     public $sHomepage;
 
     /**
-     * Unsorted list of prices received from the 
+     * Unsorted list of prices received from the
      * actual search query.
-     * 
+     *
      * @var PriceCollection
      */
     public $oPrices = null;

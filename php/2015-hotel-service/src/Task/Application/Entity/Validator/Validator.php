@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Entity\Validator;
 
 use Closure;
@@ -34,28 +35,24 @@ class Validator
      */
     public function validate(BaseEntity $oEntity, Closure $fnOnInvalidProperty, BaseCollection $oCollection = null, $iInd = 0)
     {
-        foreach ($oEntity->getValidationRules() as $sPropName => $rule)
-        {
+        foreach ($oEntity->getValidationRules() as $sPropName => $rule) {
             $bError = false;
             $sMessage = $rule['message'];
             list($sType, $sValue) = explode(':', $rule['constraint'], 2);
 
-            switch($sType)
-            {
+            switch ($sType) {
                 case 'regex':
                     $bError = !preg_match($sValue, $oEntity->$sPropName);
-                break;
+                    break;
 
                 default:
-                    if(method_exists($oEntity, $sValue))
-                    {
+                    if (method_exists($oEntity, $sValue)) {
                         $bError = $oEntity->$sValue($oEntity->$sPropName);
                     }
             }
 
-            if($bError && $fnOnInvalidProperty($oCollection, $iInd, $oEntity, $sPropName, $sMessage))
-            {
-               return;
+            if ($bError && $fnOnInvalidProperty($oCollection, $iInd, $oEntity, $sPropName, $sMessage)) {
+                return;
             }
         }
 
@@ -72,10 +69,8 @@ class Validator
      */
     public function validateDependentCollections(BaseEntity $oEntity, Closure $fnOnInvalidProperty)
     {
-        foreach ($oEntity->getFieldMapping() as $sPropName => $sFieldName)
-        {
-            if ($oEntity->$sPropName instanceof BaseCollection)
-            {
+        foreach ($oEntity->getFieldMapping() as $sPropName => $sFieldName) {
+            if ($oEntity->$sPropName instanceof BaseCollection) {
                 /** @var BaseCollection $oCollection */
                 $oCollection = $oEntity->$sPropName;
                 $oCollection->validate($this, $fnOnInvalidProperty);

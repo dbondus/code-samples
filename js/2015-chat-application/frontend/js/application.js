@@ -5,7 +5,7 @@ require([
     'services/chatClient',
 
     'views/Layout'
-], function(router, routes, chatClient, Layout) {
+], function (router, routes, chatClient, Layout) {
     "use strict";
 
     //this is main view instance. It manages live circle of screens(major view)

@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Sorter;
 
 use Task\Application\Entity\Collection\PriceCollection;
@@ -11,16 +12,16 @@ class PricesByValueSorter extends BaseHotelDataSorter
     protected function applySorting(array $aHotels)
     {
         $aAllPartners = array();
-        array_walk($aHotels, function(Hotel $oHotel) use(&$aAllPartners) {
+        array_walk($aHotels, function (Hotel $oHotel) use (&$aAllPartners) {
             $aAllPartners = array_merge($aAllPartners, $oHotel->oPartners->toArray());
         });
 
-        $aAllPriceCollections = array_map(function(Partner $oPartner) {
+        $aAllPriceCollections = array_map(function (Partner $oPartner) {
             return $oPartner->oPrices;
         }, $aAllPartners);
 
-        array_walk($aAllPriceCollections, function(PriceCollection $oCollection) {
-            $oCollection->sort(function(Price $oFirstPrice, Price $oSecondPrice) {
+        array_walk($aAllPriceCollections, function (PriceCollection $oCollection) {
+            $oCollection->sort(function (Price $oFirstPrice, Price $oSecondPrice) {
                 if ($oFirstPrice->fAmount == $oSecondPrice->fAmount) {
                     return 0;
                 }

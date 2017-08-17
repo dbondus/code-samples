@@ -6,19 +6,19 @@ var fs = require('fs'),
     url = require('url');
 
 var mime = {
-    js : "application/javascript",
-    jpg : "image/jpeg",
-    png : "image/png",
-    css : "text/css",
-    html : "text/html; charset=utf-8"
+    js: "application/javascript",
+    jpg: "image/jpeg",
+    png: "image/png",
+    css: "text/css",
+    html: "text/html; charset=utf-8"
 };
 
-module.exports = function(root, fileTypes) {
+module.exports = function (root, fileTypes) {
     fileTypes || (fileTypes = ['jpg', 'png', 'js', 'css', 'html']);
 
-    return function(req, res) {
-        return new Promise(function(resolve, reject) {
-            if(req.method !== "GET") {
+    return function (req, res) {
+        return new Promise(function (resolve, reject) {
+            if (req.method !== "GET") {
                 resolve();
                 return;
             }
@@ -26,7 +26,7 @@ module.exports = function(root, fileTypes) {
             var filePath = url.parse(req.url).pathname;
 
             var fileNameParts = path.extname(filePath).split("."),
-                extName = fileNameParts[fileNameParts.length-1] || false;
+                extName = fileNameParts[fileNameParts.length - 1] || false;
 
             if (!extName || fileTypes.indexOf(extName) === -1) {
                 resolve();

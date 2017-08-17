@@ -2,7 +2,7 @@ requirejs.config({
     "paths": {
         views: 'application/views',
         models: 'application/models',
-		configs: 'application/configs',
+        configs: 'application/configs',
         services: 'application/services',
 
         backbone: 'vendor/backbone/backbone',
@@ -21,7 +21,7 @@ requirejs.config({
     shim: {
         bluebird: {
             exports: 'Bluebird',
-            init: function() {
+            init: function () {
                 /* jshint ignore:start */
                 return Promise.noConflict();
                 /* jshint ignore:end */
@@ -29,11 +29,11 @@ requirejs.config({
         },
 
         jquery: {
-            exports : 'jQuery'
+            exports: 'jQuery'
         },
 
         underscore: {
-            exports : '_'
+            exports: '_'
         },
 
         backbone: {
@@ -45,7 +45,7 @@ requirejs.config({
         },
 
         'socket.io': {
-            exports : 'io'
+            exports: 'io'
         }
     }
 });

@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\FeedbackBundle\DependencyInjection\Compiler;
 
 use InvalidArgumentException;
@@ -7,9 +8,11 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AddProcessorsPass implements CompilerPassInterface {
+class AddProcessorsPass implements CompilerPassInterface
+{
 
-    public function process(ContainerBuilder $container) {
+    public function process(ContainerBuilder $container)
+    {
         if (!$container->hasDefinition('task.feedback.handler')) {
             return;
         }
@@ -24,7 +27,7 @@ class AddProcessorsPass implements CompilerPassInterface {
                 throw new InvalidArgumentException("Service '{$id}' must implement interface 'Task\\FeedbackBundle\\ServiceIFeedbackProcessor'.");
             }
 
-            if(empty($attrs['type'])) {
+            if (empty($attrs['type'])) {
                 throw new InvalidArgumentException("You should define feedback type of service '{$id}'");
             }
 

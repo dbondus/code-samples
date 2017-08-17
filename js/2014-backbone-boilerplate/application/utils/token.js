@@ -1,8 +1,7 @@
-define([
-], function() {
+define([], function () {
     return {
-		readToken: function() {
-			return null;
-		}
-	};
+        readToken: function () {
+            return null;
+        }
+    };
 });

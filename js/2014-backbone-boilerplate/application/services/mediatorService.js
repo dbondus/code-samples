@@ -1,5 +1,5 @@
 define([
     'app/mediator'
-], function(Mediator) {
+], function (Mediator) {
     return new Mediator();
 });

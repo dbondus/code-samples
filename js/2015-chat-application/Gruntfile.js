@@ -1,4 +1,4 @@
-module.exports = function(grunt){
+module.exports = function (grunt) {
     "use strict";
 
     require('matchdep').filterDev("grunt-*").forEach(grunt.loadNpmTasks);
@@ -62,22 +62,22 @@ module.exports = function(grunt){
             }
         },
 
-		uglify: {
-			options: {
-				mangle: {
-					mangleProperties: true,
-					reserveDOMCache: true
-				},
-				compress: {
-					drop_console: true
-				}
-			},
-			target: {
-				files: {
-					'backend/public/js/main.js': ['backend/public/js/main.js']
-				}
-			}
-		},
+        uglify: {
+            options: {
+                mangle: {
+                    mangleProperties: true,
+                    reserveDOMCache: true
+                },
+                compress: {
+                    drop_console: true
+                }
+            },
+            target: {
+                files: {
+                    'backend/public/js/main.js': ['backend/public/js/main.js']
+                }
+            }
+        },
 
         jshint: {
             files: [
@@ -134,12 +134,12 @@ module.exports = function(grunt){
 
     grunt.registerTask('default', [
         'jshint',
-		'compass:dev',
-		'requirejs'
-	]);
+        'compass:dev',
+        'requirejs'
+    ]);
     grunt.registerTask('release', [
         'compass:prod',
         'requirejs',
-		'uglify'
+        'uglify'
     ]);
 };

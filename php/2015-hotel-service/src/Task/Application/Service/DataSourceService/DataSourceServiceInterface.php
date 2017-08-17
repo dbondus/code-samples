@@ -1,7 +1,9 @@
 <?php
+
 namespace Task\Application\Service\DataSourceService;
 
-interface DataSourceServiceInterface {
+interface DataSourceServiceInterface
+{
 
     /**
      * @param integer $iDataId

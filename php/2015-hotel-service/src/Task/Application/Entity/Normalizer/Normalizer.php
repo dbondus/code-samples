@@ -26,14 +26,14 @@ class Normalizer
      */
     public function normalize(BaseEntity $oEntity)
     {
-        if(empty($oEntity)) {
+        if (empty($oEntity)) {
             throw new InvalidArgumentException('Given entity is invalid.');
         }
 
         $aResult = array();
 
-        foreach($oEntity->getFieldMapping() as $sPropName => $field) {
-            if($oEntity->$sPropName instanceof BaseCollection) {
+        foreach ($oEntity->getFieldMapping() as $sPropName => $field) {
+            if ($oEntity->$sPropName instanceof BaseCollection) {
                 /** @var BaseCollection $oCollection */
                 $oCollection = $oEntity->$sPropName;
                 $aResult[$field] = $oCollection->normalize($this);
@@ -42,7 +42,7 @@ class Normalizer
             }
 
             $formatter = null;
-            if(is_array($field)) {
+            if (is_array($field)) {
                 $formatter = method_exists($oEntity, $field['formatter'])
                     ? $field['formatter']
                     : null;
@@ -68,19 +68,19 @@ class Normalizer
      */
     public function denormalize(array $aData, $sEntityClassName)
     {
-        if(!class_exists($sEntityClassName)) {
+        if (!class_exists($sEntityClassName)) {
             throw new InvalidArgumentException(sprintf('Given entity class name [%s] is not exists.', $sEntityClassName));
         }
 
         /** @var BaseEntity $oEntity */
         $oEntity = new $sEntityClassName();
 
-        if(!$oEntity instanceof BaseEntity) {
+        if (!$oEntity instanceof BaseEntity) {
             throw new InvalidArgumentException(sprintf('Given entity class name [%s] is not inherited from BaseEntity.', $sEntityClassName));
         }
 
-        foreach($oEntity->getFieldMapping() as $sPropName => $field) {
-            if($oEntity->$sPropName instanceof BaseCollection) {
+        foreach ($oEntity->getFieldMapping() as $sPropName => $field) {
+            if ($oEntity->$sPropName instanceof BaseCollection) {
                 /** @var BaseCollection $oCollection */
                 $oCollection = $oEntity->$sPropName;
                 $oCollection->denormalize($aData[$field], $this);
@@ -89,7 +89,7 @@ class Normalizer
             }
 
             $initializer = null;
-            if(is_array($field)) {
+            if (is_array($field)) {
                 $initializer = method_exists($oEntity, $field['initializer'])
                     ? $field['initializer']
                     : null;
@@ -97,7 +97,7 @@ class Normalizer
                 $field = $field['name'];
             }
 
-            if(isset($aData[$field])) {
+            if (isset($aData[$field])) {
                 $oEntity->$sPropName = $initializer
                     ? $oEntity->$initializer($aData[$field])
                     : $aData[$field];

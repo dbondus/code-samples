@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Service\PartnerService;
 
 use PHPUnit_Framework_TestCase;
@@ -12,15 +13,15 @@ class MyPartnerServiceTest extends PHPUnit_Framework_TestCase
     public function testShouldCollectHotelArrayByCityId()
     {
         $oDataSourceMock = $this->getMockBuilder('Task\Application\Service\DataSourceService\JsonDataSourceService')
-                                ->disableOriginalConstructor()
-                                ->setMethods(array('collectDataById'))
-                                ->getMock();
+            ->disableOriginalConstructor()
+            ->setMethods(array('collectDataById'))
+            ->getMock();
 
         $oDataSourceMock->expects($this->once())
-                        ->method('collectDataById')
-                        ->will($this->returnValue(array(
-                            'hotels' => array()
-                        )));
+            ->method('collectDataById')
+            ->will($this->returnValue(array(
+                'hotels' => array()
+            )));
 
         /** @var Normalizer $oNormalizerMock */
         $oNormalizerMock = $this->getMock('Task\Application\Entity\Normalizer\Normalizer');
@@ -46,8 +47,8 @@ class MyPartnerServiceTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $oDataSourceMock->expects($this->once())
-                        ->method('collectDataById')
-                        ->will($this->returnValue(null));
+            ->method('collectDataById')
+            ->will($this->returnValue(null));
 
         /** @var Normalizer $oNormalizerMock */
         $oNormalizerMock = $this->getMock('Task\Application\Entity\Normalizer\Normalizer');

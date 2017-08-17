@@ -7,9 +7,11 @@ use Task\FeedbackBundle\Entity\Feedback;
 use Task\FeedbackBundle\Entity\FeedbackAuthor;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class FeedbackControllerTest extends WebTestCase {
+class FeedbackControllerTest extends WebTestCase
+{
 
-    public function testIndex() {
+    public function testIndex()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 

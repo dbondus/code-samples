@@ -1,16 +1,16 @@
 requirejs.config({
     "paths": {
-		app: 'application',
+        app: 'application',
         views: 'application/views',
         models: 'application/models',
-		configs: 'application/configs',
+        configs: 'application/configs',
         services: 'application/services',
         utils: 'application/utils',
 
-        backbone : 'vendor/backbone/backbone',
-        underscore : 'vendor/underscore/underscore',
+        backbone: 'vendor/backbone/backbone',
+        underscore: 'vendor/underscore/underscore',
 
-        jquery : 'vendor/jquery/jquery',
+        jquery: 'vendor/jquery/jquery',
 
         almond: 'vendor/almond/almond',
         text: 'vendor/text/text',
@@ -18,28 +18,28 @@ requirejs.config({
         bluebird: 'vendor/bluebird/js/browser/bluebird.min'
     },
 
-    shim : {
+    shim: {
         bluebird: {
             exports: 'Bluebird',
-            init: function() {
+            init: function () {
                 return Promise.noConflict();
             }
         },
 
-        jquery : {
-            exports : 'jQuery'
+        jquery: {
+            exports: 'jQuery'
         },
 
-        underscore : {
-            exports : '_'
+        underscore: {
+            exports: '_'
         },
 
-        backbone : {
-            deps : [
+        backbone: {
+            deps: [
                 'jquery',
                 'underscore'
             ],
-            exports : 'Backbone'
+            exports: 'Backbone'
         }
     }
 });

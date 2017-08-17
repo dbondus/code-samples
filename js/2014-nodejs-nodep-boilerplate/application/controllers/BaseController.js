@@ -2,9 +2,9 @@
 var BaseClass = require('../BaseClass.js');
 
 var Controller = BaseClass.extend({
-	name: null,
+    name: null,
 
-    json: function(res, data) {
+    json: function (res, data) {
         res.writeHeader(200, {
             "Content-Type": "application/json"
         });
@@ -12,21 +12,21 @@ var Controller = BaseClass.extend({
         res.end(JSON.stringify(data));
     },
 
-    ok: function(res, msg) {
+    ok: function (res, msg) {
         msg || (msg = 'OK');
 
         res.writeHeader(200);
         res.end(msg);
     },
 
-    throw500: function(res, msg) {
+    throw500: function (res, msg) {
         msg || (msg = 'error');
 
         res.writeHeader(500);
         res.end(msg);
     },
 
-    throw404: function(res, msg) {
+    throw404: function (res, msg) {
         msg || (msg = 'error');
 
         res.writeHeader(404);

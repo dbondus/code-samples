@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\FeedbackBundle\Entity;
 
 use DateTime;
@@ -11,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="feedback")
  * @ORM\Entity
  */
-class Feedback {
+class Feedback
+{
     /**
      * @var integer
      *
@@ -116,175 +118,200 @@ class Feedback {
     /**
      * @return int
      */
-    public function getID() {
+    public function getID()
+    {
         return $this->id;
     }
 
     /**
      * @param int $branchID
      */
-    public function setBranchID($branchID) {
+    public function setBranchID($branchID)
+    {
         $this->branchID = $branchID;
     }
 
     /**
      * @return int
      */
-    public function getBranchID() {
+    public function getBranchID()
+    {
         return $this->branchID;
     }
 
     /**
      * @param string $content
      */
-    public function setContent($content) {
+    public function setContent($content)
+    {
         $this->content = $content;
     }
 
     /**
      * @return string
      */
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
     }
 
     /**
      * @param DateTime $createdDate
      */
-    public function setCreatedDate($createdDate) {
+    public function setCreatedDate($createdDate)
+    {
         $this->createdDate = $createdDate;
     }
 
     /**
      * @return DateTime
      */
-    public function getCreatedDate() {
+    public function getCreatedDate()
+    {
         return $this->createdDate;
     }
 
     /**
      * @param int $duration
      */
-    public function setDuration($duration) {
+    public function setDuration($duration)
+    {
         $this->duration = $duration;
     }
 
     /**
      * @return int
      */
-    public function getDuration() {
+    public function getDuration()
+    {
         return $this->duration;
     }
 
     /**
      * @param int $feedbackTagID
      */
-    public function setFeedbackTagID($feedbackTagID) {
+    public function setFeedbackTagID($feedbackTagID)
+    {
         $this->feedbackTagID = $feedbackTagID;
     }
 
     /**
      * @return int
      */
-    public function getFeedbackTagID() {
+    public function getFeedbackTagID()
+    {
         return $this->feedbackTagID;
     }
 
     /**
      * @param string $feedbackType
      */
-    public function setFeedbackType($feedbackType) {
+    public function setFeedbackType($feedbackType)
+    {
         $this->feedbackType = $feedbackType;
     }
 
     /**
      * @return string
      */
-    public function getFeedbackType() {
+    public function getFeedbackType()
+    {
         return $this->feedbackType;
     }
 
     /**
      * @param int $feedbackAuthorID
      */
-    public function setFeedbackAuthorID($feedbackAuthorID) {
+    public function setFeedbackAuthorID($feedbackAuthorID)
+    {
         $this->feedbackAuthorID = $feedbackAuthorID;
     }
 
     /**
      * @return int
      */
-    public function getFeedbackAuthorID() {
+    public function getFeedbackAuthorID()
+    {
         return $this->feedbackAuthorID;
     }
 
     /**
      * @param int $updatedDate
      */
-    public function setUpdatedDate($updatedDate) {
+    public function setUpdatedDate($updatedDate)
+    {
         $this->updatedDate = $updatedDate;
     }
 
     /**
      * @return int
      */
-    public function getUpdatedDate() {
+    public function getUpdatedDate()
+    {
         return $this->updatedDate;
     }
 
     /**
      * @param boolean $autoAnswer
      */
-    public function setAutoAnswer($autoAnswer) {
+    public function setAutoAnswer($autoAnswer)
+    {
         $this->autoAnswer = $autoAnswer;
     }
 
     /**
      * @return boolean
      */
-    public function getAutoAnswer() {
+    public function getAutoAnswer()
+    {
         return $this->autoAnswer;
     }
 
     /**
      * @param int $answerAccountID
      */
-    public function setAnswerAccountID($answerAccountID) {
+    public function setAnswerAccountID($answerAccountID)
+    {
         $this->answerAccountID = $answerAccountID;
     }
 
     /**
      * @return int
      */
-    public function getAnswerAccountID() {
+    public function getAnswerAccountID()
+    {
         return $this->answerAccountID;
     }
 
     /**
      * @param string $answerText
      */
-    public function setAnswerText($answerText) {
+    public function setAnswerText($answerText)
+    {
         $this->answerText = $answerText;
     }
 
     /**
      * @return string
      */
-    public function getAnswerText() {
+    public function getAnswerText()
+    {
         return $this->answerText;
     }
 
     /**
      * @param DateTime $answerDate
      */
-    public function setAnswerDate($answerDate) {
+    public function setAnswerDate($answerDate)
+    {
         $this->answerDate = $answerDate;
     }
 
     /**
      * @return DateTime
      */
-    public function getAnswerDate() {
+    public function getAnswerDate()
+    {
         return $this->answerDate;
     }
 }

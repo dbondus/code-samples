@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Entity\Collection;
 
 use ArrayAccess;
@@ -25,8 +26,7 @@ class BaseCollection implements Countable, ArrayAccess
     {
         $aResult = array();
 
-        foreach($this->aList as $oEntity)
-        {
+        foreach ($this->aList as $oEntity) {
             //there could be a problem in case of large int keys
             $aResult[$oEntity->iId] = $oNormalizer->normalize($oEntity);
         }
@@ -38,8 +38,7 @@ class BaseCollection implements Countable, ArrayAccess
     {
         $this->aList = array();
 
-        foreach($aData as $iId => $aEntityData)
-        {
+        foreach ($aData as $iId => $aEntityData) {
             $entity = $oNormalizer->denormalize($aEntityData, $this->sEntityClassName);
             $entity->iId = $iId;
 
@@ -53,8 +52,7 @@ class BaseCollection implements Countable, ArrayAccess
     {
         //walking in reverse order to make possible safe entity deletion
         $iInd = count($this->aList);
-        while(--$iInd >= 0)
-        {
+        while (--$iInd >= 0) {
             $oValidator->validate($this->aList[$iInd], $fnOnInvalid, $this, $iInd);
         }
     }

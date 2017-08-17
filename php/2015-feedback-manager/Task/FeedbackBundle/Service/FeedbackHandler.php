@@ -7,7 +7,8 @@ use Task\FeedbackBundle\Event\FeedbackEvent;
 use Task\FeedbackBundle\FeedbackEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class FeedbackHandler {
+class FeedbackHandler
+{
     /**
      * @var IFeedbackProcessor[]
      */
@@ -21,7 +22,8 @@ class FeedbackHandler {
     /**
      * @param EventDispatcher $eventDispatcher
      */
-    function __construct(EventDispatcher $eventDispatcher) {
+    function __construct(EventDispatcher $eventDispatcher)
+    {
         $this->_eventDispatcher = $eventDispatcher;
     }
 
@@ -30,8 +32,9 @@ class FeedbackHandler {
      * @param string $type feedback type
      * @throws InvalidArgumentException
      */
-    public function addProcessor(IFeedbackProcessor $processor, $type) {
-        if(isset($this->_processors[$type])) {
+    public function addProcessor(IFeedbackProcessor $processor, $type)
+    {
+        if (isset($this->_processors[$type])) {
             throw new InvalidArgumentException("You have already set processor for '{$type}' feedback type");
         }
 
@@ -44,8 +47,9 @@ class FeedbackHandler {
      * @throws InvalidArgumentException
      * @return int new feedback id
      */
-    public function handle(array $data, $type) {
-        if(empty($this->_processors[$type])) {
+    public function handle(array $data, $type)
+    {
+        if (empty($this->_processors[$type])) {
             throw new InvalidArgumentException("Unknown feedback type: '{$type}'");
         }
 

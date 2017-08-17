@@ -1,15 +1,15 @@
 require([
     'views/Layout',
 
-	'services/routerService',
-	'configs/routes',
+    'services/routerService',
+    'configs/routes',
 
     'utils/promise'
-], function(Layout, router, routes) {
-	"use strict";
+], function (Layout, router, routes) {
+    "use strict";
 
-	new Layout({ el: 'body'	}).render();
+    new Layout({el: 'body'}).render();
 
-	router.setRoutes(routes);
-	router.start();
+    router.setRoutes(routes);
+    router.start();
 });

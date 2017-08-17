@@ -4,7 +4,8 @@ namespace Task\FeedbackBundle\Service;
 
 use Task\FeedbackBundle\Entity\Feedback;
 
-interface IFeedbackProcessor {
+interface IFeedbackProcessor
+{
 
     /**
      * @param array $inputData

@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Sorter;
 
 use Task\Application\Entity\Hotel;
@@ -19,13 +20,11 @@ class BaseHotelDataSorter implements SorterInterface
 
     protected function validateData(array $aHotels)
     {
-        if (!$aHotels)
-        {
+        if (!$aHotels) {
             throw new \InvalidArgumentException('Hotels array is invalid');
         }
 
-        if(!$aHotels[0] instanceof Hotel)
-        {
+        if (!$aHotels[0] instanceof Hotel) {
             throw new \InvalidArgumentException(sprintf('$aHotels should contain only Hotel entities, but there is %s instance', get_class($aHotels[0])));
         }
     }

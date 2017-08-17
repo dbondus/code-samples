@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Entity\Collection;
 
 class HotelCollection extends BaseCollection

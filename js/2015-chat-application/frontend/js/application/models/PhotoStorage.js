@@ -1,7 +1,7 @@
 define([
     'models/base/Model'
 
-], function(BaseModel) {
+], function (BaseModel) {
     "use strict";
 
     /**
@@ -11,10 +11,10 @@ define([
     var PhotoStorage = BaseModel.extend(
         /** @lends PhotoStorage.prototype */
         {
-        defaults: {
-            data: []
-        }
-    });
+            defaults: {
+                data: []
+            }
+        });
 
     return PhotoStorage;
 });

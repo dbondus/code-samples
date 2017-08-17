@@ -6,10 +6,11 @@ function BaseClass() {
     this.initialize.apply(this, arguments);
 }
 
-BaseClass.prototype.initialize = function() {};
+BaseClass.prototype.initialize = function () {
+};
 
-BaseClass.extend = function(definition, statics) {
-	statics || (statics = {});
+BaseClass.extend = function (definition, statics) {
+    statics || (statics = {});
 
     var Base = this;
 
@@ -22,8 +23,8 @@ BaseClass.extend = function(definition, statics) {
 
     extend(Descendant.prototype, definition);
 
-	statics.extend = BaseClass.extend;
-	extend(Descendant, statics);
+    statics.extend = BaseClass.extend;
+    extend(Descendant, statics);
 
     return Descendant;
 };

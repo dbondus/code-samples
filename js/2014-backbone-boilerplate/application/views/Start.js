@@ -1,9 +1,9 @@
 define([
-	'views/BaseView',
+    'views/BaseView',
 
     'text!./_tmpl/Start.html'
-], function(BaseView, tmplData) {
-	"use strict";
+], function (BaseView, tmplData) {
+    "use strict";
 
     return BaseView.extend({
         name: 'startView',

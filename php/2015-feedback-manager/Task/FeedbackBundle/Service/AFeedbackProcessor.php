@@ -8,7 +8,8 @@ use Task\FeedbackBundle\Entity\Feedback;
 use Task\FeedbackBundle\Entity\FeedbackAuthor;
 use Task\FeedbackBundle\Util\EntityUtils;
 
-abstract class AFeedbackProcessor implements IFeedbackProcessor {
+abstract class AFeedbackProcessor implements IFeedbackProcessor
+{
     /**
      * @var string
      */
@@ -19,7 +20,8 @@ abstract class AFeedbackProcessor implements IFeedbackProcessor {
      */
     protected $_em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->_em = $em;
     }
 
@@ -27,7 +29,8 @@ abstract class AFeedbackProcessor implements IFeedbackProcessor {
      * @param array $inputData
      * @return Feedback
      */
-    public function process(array $inputData) {
+    public function process(array $inputData)
+    {
         $feedbackData = $this->_prepareFeedbackData($inputData);
 
         return $this->_createFeedback($feedbackData);
@@ -38,7 +41,8 @@ abstract class AFeedbackProcessor implements IFeedbackProcessor {
      * @param string $value
      * @return FeedbackAuthor
      */
-    protected function _createFeedbackAuthor($key, $value) {
+    protected function _createFeedbackAuthor($key, $value)
+    {
         /** @var FeedbackAuthor $author */
         $author = EntityUtils::array2entity([
             $key => $value,
@@ -55,7 +59,8 @@ abstract class AFeedbackProcessor implements IFeedbackProcessor {
      * @param array $feedbackData
      * @return Feedback
      */
-    protected function _createFeedback(array $feedbackData) {
+    protected function _createFeedback(array $feedbackData)
+    {
         /** @var Feedback $feedback */
         $feedback = EntityUtils::array2entity($feedbackData, new Feedback());
 
@@ -71,7 +76,8 @@ abstract class AFeedbackProcessor implements IFeedbackProcessor {
      * @param array $raw
      * @return array
      */
-    protected function _prepareFeedbackData($raw) {
+    protected function _prepareFeedbackData($raw)
+    {
         // TODO: branch_id exists
 
         return [

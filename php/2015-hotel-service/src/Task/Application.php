@@ -34,11 +34,11 @@ class Application extends Container
             )
         );
 
-        $this['entity_normalizer'] = function() {
+        $this['entity_normalizer'] = function () {
             return new Normalizer();
         };
 
-        $this['entity_validator'] = function() {
+        $this['entity_validator'] = function () {
             return new Validator();
         };
 

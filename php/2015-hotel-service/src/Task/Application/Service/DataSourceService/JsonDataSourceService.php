@@ -1,4 +1,5 @@
 <?php
+
 namespace Task\Application\Service\DataSourceService;
 
 class JsonDataSourceService implements DataSourceServiceInterface
@@ -31,8 +32,7 @@ class JsonDataSourceService implements DataSourceServiceInterface
     {
         $sFile = sprintf('%s%d.json', $this->sPath, $iDataId);
 
-        if(!file_exists($sFile))
-        {
+        if (!file_exists($sFile)) {
             return null;
         }
 
